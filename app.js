@@ -1,4 +1,5 @@
 const ul = document.querySelector("ul");
+const heading = document.querySelector("h2");
 
 const fetchCountries = async () => {
     const response = await fetch("https://restcountries.com/v3.1/all");
@@ -12,7 +13,7 @@ const fetchCountries = async () => {
         const span1 = document.createElement("span");
         span1.innerText = flag;
         span1.className = "flag";
-        
+
         const name = country.name;
 
         const span2 = document.createElement("span");
@@ -22,6 +23,11 @@ const fetchCountries = async () => {
         listItem.appendChild(span2);
         ul.appendChild(listItem);
     })
+
+    const countriesPopulation = jsonData.map(country => country.population).flat();
+
+    const totalPopulation = countriesPopulation.reduce((reducer, population) => reducer + population, 0);
+    heading.innerText = totalPopulation;
 }
 
 fetchCountries()
