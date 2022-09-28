@@ -11,7 +11,8 @@ const fetchCountries = async () => {
 
         const span1 = document.createElement("span");
         span1.innerText = flag;
-
+        span1.className = "flag";
+        
         const name = country.name;
 
         const span2 = document.createElement("span");
