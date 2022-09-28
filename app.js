@@ -27,7 +27,8 @@ const fetchCountries = async () => {
     const countriesPopulation = jsonData.map(country => country.population).flat();
 
     const totalPopulation = countriesPopulation.reduce((reducer, population) => reducer + population, 0);
-    heading.innerText = totalPopulation;
+    const text = "Total Population: " + totalPopulation
+    heading.innerText = text;
 }
 
 fetchCountries()
