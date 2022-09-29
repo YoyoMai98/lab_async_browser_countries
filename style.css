@@ -10,3 +10,8 @@ h2 {
     font-size: 28px;
     margin-right: 5px;
 }
+
+li{
+    display: flex;
+    align-items: center;
+}
