@@ -1,11 +1,7 @@
 const ul = document.querySelector("ul");
-const heading = document.querySelector("h2");
 
-const fetchCountries = async () => {
-    const response = await fetch("https://restcountries.com/v3.1/all");
-    const jsonData = await response.json();
-    
-    jsonData.forEach(country => {
+const createCountryList = countries => {
+    countries.forEach(country => {
         const listItem = document.createElement("li");
 
         const flag = country.flag;
@@ -23,12 +19,27 @@ const fetchCountries = async () => {
         listItem.appendChild(span2);
         ul.appendChild(listItem);
     })
+}
 
-    const countriesPopulation = jsonData.map(country => country.population).flat();
+const calculatePopulation = countriesPopulation => {
+    return countriesPopulation.reduce((reducer, population) => reducer + population, 0);
+}
 
-    const totalPopulation = countriesPopulation.reduce((reducer, population) => reducer + population, 0);
+const displayPopulation = totalPopulation => {
+    const heading = document.querySelector("h2");
     const text = "Total Population: " + totalPopulation
     heading.innerText = text;
 }
 
-fetchCountries()
+const fetchCountries = async () => {
+    const response = await fetch("https://restcountries.com/v3.1/all");
+    const jsonData = await response.json();
+    
+    createCountryList(jsonData);
+
+    const countriesPopulation = jsonData.map(country => country.population).flat();
+    const totalPopulation = calculatePopulation(countriesPopulation);
+    displayPopulation(totalPopulation);
+}
+
+fetchCountries();
